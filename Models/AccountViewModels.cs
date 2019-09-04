@@ -67,7 +67,7 @@ namespace TrashCollector.Models
     {
         [Required]
         [Display(Name = "UserRoles")]
-        public IEnumerable<SelectListItem> UserRole { get; set; }
+        public string UserRole { get; set; }
 
         [Required]
         [EmailAddress]
