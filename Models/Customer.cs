@@ -13,12 +13,13 @@ namespace TrashCollector.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public double Balance { get; set; }
+        public double MonthlyBalance { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string DayOfTheWeek { get; set; }
+        public string  DayOfTheMonth { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
