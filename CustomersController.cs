@@ -40,7 +40,7 @@ namespace TrashCollector
         //GET: Create Customer
         public ActionResult Create()
         {
-            ViewBag.ApplicationId = new SelectList(items: db.ApplicationUsers, "Id", "Email");
+            ViewBag.ApplicationId = new SelectList(items: db.Users, "Id", "Email");
             return View();
         }
         //POST: Create Customer
@@ -55,9 +55,71 @@ namespace TrashCollector
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email", customer.ApplicationId);
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
             return View(customer);         
         }
-
+        //GET: Edit Customer
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }    
+        //POST: Edit Customer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }
+        //GET: Delete Customer
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+        
+        
+        //POST: Delete Customer
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
