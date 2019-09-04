@@ -15,7 +15,7 @@ namespace TrashCollector
             CreateRolesAndUsers();
         }
 
-        //this method creates default User roles and an Admin user for login
+        //this method creates default User roles 
         private void CreateRolesAndUsers()
         {
             ApplicationDbContext db = new ApplicationDbContext();

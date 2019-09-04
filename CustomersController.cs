@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
@@ -17,32 +20,43 @@ namespace TrashCollector
         //GET: CUSTOMER
         public ActionResult Index()
         {
-            return View();
+            var customers = db.Customers.Include(c => c.ApplicationUser);
+            return View(customers.ToList());
         }
         //GET: Customer Details
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null) 
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
         }
         //GET: Create Customer
         public ActionResult Create()
         {
+            ViewBag.ApplicationId = new SelectList(items: db.ApplicationUsers, "Id", "Email");
             return View();
         }
         //POST: Create Customer
-        public ActionResult Create(Customer customer)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
         {
-            try
+            if (ModelState.IsValid)
             {
-                db.customers.Add(customer);
+                db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View(customer);
-            }
 
+            ViewBag.ApplicationId = new SelectList(db.ApplicationUsers, "Id", "Email", customer.ApplicationId);
+            return View(customer);         
         }
 
     }
