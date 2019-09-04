@@ -18,8 +18,9 @@ namespace TrashCollector.Models
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public string DayOfTheWeek { get; set; }
-        public string  DayOfTheMonth { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string PickupDate { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
