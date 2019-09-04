@@ -121,5 +121,34 @@ namespace TrashCollector
             }
             base.Dispose(disposing);
         }
+        //Change Pickup Date
+        public ActionResult ChangePickupDate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }
+        //POST: Edit Customer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePickupDate([Bind(Include = "FirstName, LastName, ZipCode, PickupDate")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }
     }
 }

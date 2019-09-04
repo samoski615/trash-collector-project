@@ -155,7 +155,7 @@ namespace TrashCollector.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRolesAsync(user.Id, model.UserRole);
+                    await UserManager.AddToRolesAsync(user.Id, model.UserRole.ToString());
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
