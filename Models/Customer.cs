@@ -20,7 +20,7 @@ namespace TrashCollector.Models
         public string ZipCode { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public string PickupDate { get; set; }
+        public string PickupDay { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

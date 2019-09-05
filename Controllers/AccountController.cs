@@ -166,7 +166,15 @@ namespace TrashCollector.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //Assign Role to Users HERE//////////////////
-                    //Ends HERE
+
+                    if (model.UserRole == "Customer")
+                    {
+                        return RedirectToAction("Create", "Customers");
+                    }
+                    else if (model.UserRole == "Employee")
+                    {
+                        return RedirectToAction("Create", "Employees");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Name = new SelectList(db.Roles.ToList(), "Name", "Name");

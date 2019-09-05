@@ -3,13 +3,13 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class myNewMigration : DbMigration
+    public partial class myMigration : DbMigration
     {
         public override void Up()
         {
             AddColumn("dbo.Customers", "StartDate", c => c.String());
             AddColumn("dbo.Customers", "EndDate", c => c.String());
-            AddColumn("dbo.Customers", "PickupDate", c => c.String());
+            AddColumn("dbo.Customers", "PickupDay", c => c.String());
             DropColumn("dbo.Customers", "DayOfTheWeek");
             DropColumn("dbo.Customers", "DayOfTheMonth");
         }
@@ -18,7 +18,7 @@ namespace TrashCollector.Migrations
         {
             AddColumn("dbo.Customers", "DayOfTheMonth", c => c.String());
             AddColumn("dbo.Customers", "DayOfTheWeek", c => c.String());
-            DropColumn("dbo.Customers", "PickupDate");
+            DropColumn("dbo.Customers", "PickupDay");
             DropColumn("dbo.Customers", "EndDate");
             DropColumn("dbo.Customers", "StartDate");
         }

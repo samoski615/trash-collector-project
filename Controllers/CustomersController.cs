@@ -122,7 +122,7 @@ namespace TrashCollector
             base.Dispose(disposing);
         }
         //Change Pickup Date
-        public ActionResult ChangePickupDate(int? id)
+        public ActionResult ChangePickupDay(int? id)
         {
             if (id == null)
             {
@@ -136,10 +136,10 @@ namespace TrashCollector
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
             return View(customer);
         }
-        //POST: Edit Customer
+        //POST: Change Pickup Date
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePickupDate([Bind(Include = "FirstName, LastName, ZipCode, PickupDate")] Customer customer)
+        public ActionResult ChangePickupDay([Bind(Include = "FirstName, LastName, ZipCode, PickupDay")] Customer customer)
         {
             if (ModelState.IsValid)
             {
