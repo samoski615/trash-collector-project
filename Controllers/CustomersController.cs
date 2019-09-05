@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -50,6 +51,7 @@ namespace TrashCollector
         {
             if (ModelState.IsValid)
             {
+                customer.ApplicationId = User.Identity.GetUserId();
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,7 +78,7 @@ namespace TrashCollector
         //POST: Edit Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
         {
             if (ModelState.IsValid)
             {

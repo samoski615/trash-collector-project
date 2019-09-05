@@ -17,8 +17,8 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.ApplicationUser);
-            return View(employees.ToList());
+            var customers = db.Employees.Include(c => c.ApplicationUser);
+            return View(customers.ToList());
         }
 
         // GET: Employees/Details/5
@@ -48,10 +48,11 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName, LastName, Zipcode")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, Zipcode")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                employee.ApplicationId = "User.Identity.GetUserId()";
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");

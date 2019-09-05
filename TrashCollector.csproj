@@ -175,9 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909051224123_myMigration.cs" />
-    <Compile Include="Migrations\201909051224123_myMigration.Designer.cs">
-      <DependentUpon>201909051224123_myMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201909051655535_newMigrationAgain.cs" />
+    <Compile Include="Migrations\201909051655535_newMigrationAgain.Designer.cs">
+      <DependentUpon>201909051655535_newMigrationAgain.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,7 +250,9 @@
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Employees\Map.cshtml" />
     <Content Include="Views\Employees\Customers.cshtml" />
-    <Content Include="Views\Customers\View.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -269,8 +271,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909051224123_myMigration.resx">
-      <DependentUpon>201909051224123_myMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909051655535_newMigrationAgain.resx">
+      <DependentUpon>201909051655535_newMigrationAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
