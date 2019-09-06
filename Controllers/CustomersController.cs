@@ -18,11 +18,16 @@ namespace TrashCollector
         {
             db = new ApplicationDbContext();
         }
-        //GET: CUSTOMER
         public ActionResult Index()
         {
-            var customers = db.Customers.Include(c => c.ApplicationUser);
-            return View(customers.ToList());
+            return View();
+        }
+        //GET: This gets a list of registered customers from the DB including the current user -- CHANGE THIS to just a view of the CustomerControllerHomeView
+        public ActionResult CustomerDetails()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var currentCustomer = db.Customers.Where(c => c.ApplicationId == currentUserId);
+            return View(currentCustomer);
         }
         //GET: Customer Details
         public ActionResult Details(int? id)
@@ -32,7 +37,7 @@ namespace TrashCollector
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
-            if (customer == null) 
+            if (customer == null)
             {
                 return HttpNotFound();
             }
@@ -58,7 +63,7 @@ namespace TrashCollector
             }
 
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
-            return View(customer);         
+            return View(customer);
         }
         //GET: Edit Customer
         public ActionResult Edit(int? id)
@@ -74,7 +79,7 @@ namespace TrashCollector
             }
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
             return View(customer);
-        }    
+        }
         //POST: Edit Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,8 +108,8 @@ namespace TrashCollector
             }
             return View(customer);
         }
-        
-        
+
+
         //POST: Delete Customer
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -124,7 +129,37 @@ namespace TrashCollector
             base.Dispose(disposing);
         }
         //Change Pickup Date
-        public ActionResult ChangePickupDay(int? id)
+        //public ActionResult ChangePickupDay(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Customer customer = db.Customers.Find(id);
+        //    if (customer == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+        //    return View(customer);
+        //}
+        //POST: Change Pickup Date
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePickupDay([Bind(Include = "PickupDay")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                customer.ApplicationId = User.Identity.GetUserId();
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }
+
+        public ActionResult ViewBalance(int? id)
         {
             if (id == null)
             {
@@ -135,22 +170,7 @@ namespace TrashCollector
             {
                 return HttpNotFound();
             }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
-            return View(customer);
-        }
-        //POST: Change Pickup Date
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ChangePickupDay([Bind(Include = "FirstName, LastName, ZipCode, PickupDay")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
-            return View(customer);
+            return View(customer.MonthlyBalance);
         }
     }
 }

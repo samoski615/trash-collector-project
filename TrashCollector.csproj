@@ -244,7 +244,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\CustomerDetails.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Employees\Map.cshtml" />
@@ -253,6 +253,10 @@
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Customers\Delete.cshtml" />
     <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
+    <Content Include="Views\Customers\ChangePickupDay.cshtml" />
+    <Content Include="Views\Customers\SuspendPickup.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\ViewBalance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
