@@ -52,14 +52,14 @@ namespace TrashCollector
         //POST: Create Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 customer.ApplicationId = User.Identity.GetUserId();
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerDetails");
             }
 
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
@@ -153,7 +153,7 @@ namespace TrashCollector
                 customer.ApplicationId = User.Identity.GetUserId();
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerDetails");
             }
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
             return View(customer);
