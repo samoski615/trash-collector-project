@@ -175,13 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909061444446_newMigration.cs" />
-    <Compile Include="Migrations\201909061444446_newMigration.Designer.cs">
-      <DependentUpon>201909061444446_newMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909061528476_test.cs" />
-    <Compile Include="Migrations\201909061528476_test.Designer.cs">
-      <DependentUpon>201909061528476_test.cs</DependentUpon>
+    <Compile Include="Migrations\201909062041099_anotherFreakingMigration.cs" />
+    <Compile Include="Migrations\201909062041099_anotherFreakingMigration.Designer.cs">
+      <DependentUpon>201909062041099_anotherFreakingMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -261,6 +257,7 @@
     <Content Include="Views\Customers\SuspendPickup.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\ViewBalance.cshtml" />
+    <Content Include="Views\Customers\RequestPickup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -279,11 +276,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909061444446_newMigration.resx">
-      <DependentUpon>201909061444446_newMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909061528476_test.resx">
-      <DependentUpon>201909061528476_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909062041099_anotherFreakingMigration.resx">
+      <DependentUpon>201909062041099_anotherFreakingMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

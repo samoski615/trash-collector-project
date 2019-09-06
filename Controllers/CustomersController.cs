@@ -83,13 +83,13 @@ namespace TrashCollector
         //POST: Edit Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CustomerDetails");
             }
             ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
             return View(customer);
@@ -128,22 +128,7 @@ namespace TrashCollector
             }
             base.Dispose(disposing);
         }
-        //Change Pickup Date
-        //public ActionResult ChangePickupDay(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Customer customer = db.Customers.Find(id);
-        //    if (customer == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
-        //    return View(customer);
-        //}
-        //POST: Change Pickup Date
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePickupDay([Bind(Include = "PickupDay")] Customer customer)
@@ -165,12 +150,36 @@ namespace TrashCollector
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            var customer = db.Customers.Where(c => c.Id == id).ToList();
+
             if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(customer.MonthlyBalance);
+            return View(customer);
+        }
+
+
+        public ActionResult RequestPickup()
+        {
+            ViewBag.ApplicationId = new SelectList(items: db.Users, "Id", "Email");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RequestPickup([Bind(Include = "ExtraDate")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var x = User.Identity.GetUserId();
+                var cust = db.Customers.Where(c => c.ApplicationId == x).FirstOrDefault();
+                cust.ExtraDate = customer.ExtraDate;
+                db.SaveChanges();
+                return RedirectToAction("CustomerDetails");
+            }
+
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
         }
     }
 }
