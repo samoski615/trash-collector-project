@@ -171,10 +171,39 @@ namespace TrashCollector
         {
             if (ModelState.IsValid)
             {
-                var x = User.Identity.GetUserId();
-                var cust = db.Customers.Where(c => c.ApplicationId == x).FirstOrDefault();
+                var uId = User.Identity.GetUserId();
+                var cust = db.Customers.Where(c => c.ApplicationId == uId).FirstOrDefault();
                 cust.ExtraDate = customer.ExtraDate;
                 db.SaveChanges();
+                return RedirectToAction("CustomerDetails");
+            }
+
+            ViewBag.ApplicationId = new SelectList(db.Users, "Id", "Email", customer.ApplicationId);
+            return View(customer);
+        }
+
+
+        public ActionResult SuspendPickup()
+        {
+            ViewBag.ApplicationId = new SelectList(items: db.Users, "Id", "Email");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SuspendPickup([Bind(Include = "StartDate, EndDate")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var uId = User.Identity.GetUserId();
+                var cust = db.Customers.Where(c => c.ApplicationId == uId).FirstOrDefault();
+                if (cust.StartDate == customer.StartDate)
+                {
+                    db.SaveChanges();
+                }
+                if (cust.EndDate == customer.EndDate)
+                {
+                    db.SaveChanges();
+                }
                 return RedirectToAction("CustomerDetails");
             }
 
