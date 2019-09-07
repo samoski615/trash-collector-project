@@ -83,7 +83,7 @@ namespace TrashCollector
         //POST: Edit Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay, ExtraDate")] Customer customer)
         {
             if (ModelState.IsValid)
             {
