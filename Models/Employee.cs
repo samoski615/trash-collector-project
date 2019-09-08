@@ -21,6 +21,20 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
+        [Display(Name = "Which day would you like to search?")]
+        public DayOfWeek PickupDay { get; set; }
+
+        [Display(Name = "Confirm Pickup")]
+        public bool ConfirmPickup { get; set; }
+
+        [Display(Name = "Charges Applied")]
+        public double Charges { get; set; }
+
+        //public enum WeekDays
+        //{
+        //    Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+        //}
+
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

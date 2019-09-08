@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,8 +18,18 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var customers = db.Employees.Include(c => c.ApplicationUser);
-            return View(customers.ToList());
+            var uId = User.Identity.GetUserId();
+            var todaysPickups = db.Customers.Where(c => c.ApplicationId == uId) && db.Employees.Where(e => e.ApplicationId == uId).Where(c => c.ZipCode == uId).Select();
+            //var customers = db.Customers.Include(c => c.ApplicationId == c.ZipCode).Select(c => c.ZipCode);
+            
+            if (customers == employee)
+            {
+                return View(customers.ToList());
+            }
+            else
+            {
+                return View("Index", "Home");
+            }
         }
 
         // GET: Employees/Details/5
@@ -52,7 +63,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                employee.ApplicationId = "User.Identity.GetUserId()";
+                employee.ApplicationId = User.Identity.GetUserId();
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,6 +139,21 @@ namespace TrashCollector.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Search(DayOfWeek PickupDay)
+        {
+            var uId = User.Identity.GetUserId();
+            Employee employee = db.Employees.Find(uId);
+            
+            if ()
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
         }
     }
 }
