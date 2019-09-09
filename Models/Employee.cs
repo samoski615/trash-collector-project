@@ -22,7 +22,7 @@ namespace TrashCollector.Models
         public string ZipCode { get; set; }
 
         [Display(Name = "Which day would you like to search?")]
-        public DayOfWeek PickupDay { get; set; }
+        public DayOfWeek? PickupDay { get; set; }
 
         [Display(Name = "Confirm Pickup")]
         public bool ConfirmPickup { get; set; }

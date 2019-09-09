@@ -18,9 +18,6 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            //var uId = User.Identity.GetUserId();
-            //var todaysPickups = db.Customers.Where(c => c.ApplicationId == uId) && db.Employees.Where(e => e.ApplicationId);
-            //var customers = db.Customers.Include(c => c.ApplicationId == c.ZipCode).Select(c => c.ZipCode);
             var currentUId = User.Identity.GetUserId();
             var todaysPickups = db.Customers.Where(c => c.ApplicationId == c.ApplicationId).Select(c => c.ZipCode);
             var employees = db.Employees.Where(e => e.ApplicationId == currentUId).Select(e => e.ZipCode);
