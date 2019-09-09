@@ -175,13 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909082112260_heyheyItsAMigration.cs" />
-    <Compile Include="Migrations\201909082112260_heyheyItsAMigration.Designer.cs">
-      <DependentUpon>201909082112260_heyheyItsAMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909090522080_migration1.cs" />
-    <Compile Include="Migrations\201909090522080_migration1.Designer.cs">
-      <DependentUpon>201909090522080_migration1.cs</DependentUpon>
+    <Compile Include="Migrations\201909092057172_yoyoYO.cs" />
+    <Compile Include="Migrations\201909092057172_yoyoYO.Designer.cs">
+      <DependentUpon>201909092057172_yoyoYO.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -252,7 +248,7 @@
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Employees\Map.cshtml" />
-    <Content Include="Views\Employees\Customers.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Customers\Delete.cshtml" />
@@ -263,6 +259,8 @@
     <Content Include="Views\Customers\ViewBalance.cshtml" />
     <Content Include="Views\Customers\RequestPickup.cshtml" />
     <Content Include="Views\Employees\Search.cshtml" />
+    <Content Include="Views\Employees\CustomerIndex.cshtml" />
+    <Content Include="Views\Employees\ServiceDetails.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -282,11 +280,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909082112260_heyheyItsAMigration.resx">
-      <DependentUpon>201909082112260_heyheyItsAMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909090522080_migration1.resx">
-      <DependentUpon>201909090522080_migration1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909092057172_yoyoYO.resx">
+      <DependentUpon>201909092057172_yoyoYO.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

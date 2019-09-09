@@ -23,10 +23,10 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PickupDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Weekday, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PickupDay", new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Pickup Day", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PickupDay, "", new { @class = "text-danger" })
+                @Html.DropDownList("Weekday", new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Weekday", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Weekday, "", new { @class = "text-danger" })
             </div>
         </div>
 

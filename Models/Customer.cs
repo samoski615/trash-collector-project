@@ -18,6 +18,9 @@ namespace TrashCollector.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Weekly Balance")]
+        public string WeeklyCharges { get; set; }
+
         [Display(Name = "Monthly Balance")]
         public double MonthlyBalance { get; set; }
 
@@ -42,30 +45,31 @@ namespace TrashCollector.Models
         public string EndDate { get; set; }
 
         [Display(Name = "Weekly Pickup Day")]
-        public WeekDays? PickupDay { get; set; }
+        public WeekDays? DayOfWeek { get; set; }
 
         [Display(Name = "Additional Pickup Day")]
         [DataType(DataType.Date)]
         public string ExtraDate { get; set; }
 
-        [Display(Name = "Month")]
-        public string Month { get; set; }
+        //[Display(Name = "Month")]
+        //public string Month { get; set; }
 
-        [Display(Name = "Day")]
-        public string Day { get; set; }
+        //[Display(Name = "Day")]
+        //public string Day { get; set; }
 
-        [Display(Name = "Year")]
-        public string Year { get; set; }
+        //[Display(Name = "Year")]
+        //public string Year { get; set; }
 
-        
-        public enum WeekDays
-        {
-            Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
-        }
+        [Display(Name = "Confirm Pickup")]
+        public bool ConfirmPickup { get; set; }
 
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+    }
+    public enum WeekDays
+    {
+        Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
     }
 }

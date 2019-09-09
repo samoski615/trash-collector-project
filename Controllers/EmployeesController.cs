@@ -15,22 +15,11 @@ namespace TrashCollector.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Employees
+
         public ActionResult Index()
         {
-            var currentUId = User.Identity.GetUserId();
-            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
-            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
-
-            if (todaysPickups.Equals(null))
-            {
-                return View("Index");
-            }
-            else
-            {
-                return View(todaysPickups.ToList());
-            }
-        }
+            return View();
+        }        
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -39,12 +28,12 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Customer customer= db.Customers.Find(id);
+            if (customer == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(customer);
         }
 
         // GET: Employees/Create
@@ -140,20 +129,88 @@ namespace TrashCollector.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Search(DayOfWeek PickupDay)
+        // GET: Employees Daily Route of Customers by ZipCode
+        public ActionResult CustomerIndex()
         {
-            var uId = User.Identity.GetUserId();
-            Employee employee = db.Employees.Find(uId);
+            var currentUId = User.Identity.GetUserId();
+            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
 
-            //if ()
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //if (employee == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View(employee);
+            if (todaysPickups.Equals(null))
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View(todaysPickups.ToList());
+            }
+        }
+        //public ActionResult Search(DayOfWeek dayOfWeek)
+        //{
+        //    var currentUId = User.Identity.GetUserId();
+        //    var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+        //    var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
+
+        //    if (todaysPickups.Equals(null))
+        //    {
+        //        return View("Index");
+        //    }
+        //    if (dayOfWeek == input)
+        //    {
+        //        return View();
+        //    }
+        //    else
+        //    {
+        //        return View(todaysPickups.ToList());
+        //    }
+        //}
+
+        public ActionResult ServiceDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        public ActionResult ConfirmPickup()
+        {
+            var currentUId = User.Identity.GetUserId();
+            var pickupComplete = db.Employees.Where(e => e.ConfirmPickup).FirstOrDefault();
+            if (pickupComplete = true)
+            {
+                ChargeCustomer(customer);
+            }
+                //if employee selects checkbox (= true)
+                //then ChargeCustomer(double weeklyCharges) for the week
+        }
+
+        public ActionResult ChargeCustomer(int id)
+        {
+            var editAccountCharges = db.Customers.Where(c => c.Id == id).SingleOrDefault();
+
+            return View(editAccountCharges); //create view with only weekly charges to update
+        }
+        [HttpPost]
+        public ActionResult ChargeCustomer(Customer customer)
+        {
+            try
+            {
+                var customerCharged = db.Customers.Where(c => c.Id == customer.Id).SingleOrDefault();
+                customerCharged.WeeklyCharges = customer.WeeklyCharges;
+                db.SaveChanges();
+                return RedirectToAction("ServiceDetails");
+            }
+            catch
+            {
+                return View("CustomerIndex");
+            }
         }
     }
 }
