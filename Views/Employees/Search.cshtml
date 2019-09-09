@@ -5,9 +5,12 @@
 }
 
 <h2>Search</h2>
+@using (Html.BeginForm("Search", "Employees"))
+{
+    @Html.Editor("SearchText")
+    <input type="submit" value="Search" class="btn btn-default" />
+}
 
-
-@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 

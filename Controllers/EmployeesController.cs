@@ -19,17 +19,16 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             var currentUId = User.Identity.GetUserId();
-            var todaysPickups = db.Customers.Where(c => c.ApplicationId == c.ApplicationId).Select(c => c.ZipCode);
-            var employees = db.Employees.Where(e => e.ApplicationId == currentUId).Select(e => e.ZipCode);
+            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
 
-
-            if (todaysPickups == employees)
+            if (todaysPickups.Equals(null))
             {
-                return View(todaysPickups.ToList());
+                return View("Index");
             }
             else
             {
-                return View("Index", "Home");
+                return View(todaysPickups.ToList());
             }
         }
 
