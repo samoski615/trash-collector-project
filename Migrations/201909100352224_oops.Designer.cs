@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class yoyoYO : IMigrationMetadata
+    public sealed partial class oops : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(yoyoYO));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(oops));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909092057172_yoyoYO"; }
+            get { return "201909100352224_oops"; }
         }
         
         string IMigrationMetadata.Source

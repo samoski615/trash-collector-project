@@ -45,20 +45,11 @@ namespace TrashCollector.Models
         public string EndDate { get; set; }
 
         [Display(Name = "Weekly Pickup Day")]
-        public WeekDays? DayOfWeek { get; set; }
+        public DayOfWeek? DayOfWeek { get; set; }
 
         [Display(Name = "Additional Pickup Day")]
         [DataType(DataType.Date)]
         public string ExtraDate { get; set; }
-
-        //[Display(Name = "Month")]
-        //public string Month { get; set; }
-
-        //[Display(Name = "Day")]
-        //public string Day { get; set; }
-
-        //[Display(Name = "Year")]
-        //public string Year { get; set; }
 
         [Display(Name = "Confirm Pickup")]
         public bool ConfirmPickup { get; set; }
@@ -68,7 +59,7 @@ namespace TrashCollector.Models
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }
-    public enum WeekDays
+    public enum DayOfWeek
     {
         Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
     }

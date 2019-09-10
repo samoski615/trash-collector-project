@@ -178,39 +178,19 @@ namespace TrashCollector.Controllers
             }
             return View(customer);
         }
-
-        public ActionResult ConfirmPickup()
+        public ActionResult ConfirmPickup(int id)
         {
-            var currentUId = User.Identity.GetUserId();
-            var pickupComplete = db.Employees.Where(e => e.ConfirmPickup).FirstOrDefault();
-            if (pickupComplete = true)
-            {
-                ChargeCustomer(customer);
-            }
-                //if employee selects checkbox (= true)
-                //then ChargeCustomer(double weeklyCharges) for the week
+            var customer = db.Customers.Find(id);
+            customer.ConfirmPickup = true;
+            ChargeCustomer(customer);
+            return RedirectToAction("CustomerIndex");
+        }
+        public void ChargeCustomer(Customer customer)
+        {
+            customer.WeeklyCharges += 25.00;
+            db.SaveChanges();
         }
 
-        public ActionResult ChargeCustomer(int id)
-        {
-            var editAccountCharges = db.Customers.Where(c => c.Id == id).SingleOrDefault();
 
-            return View(editAccountCharges); //create view with only weekly charges to update
-        }
-        [HttpPost]
-        public ActionResult ChargeCustomer(Customer customer)
-        {
-            try
-            {
-                var customerCharged = db.Customers.Where(c => c.Id == customer.Id).SingleOrDefault();
-                customerCharged.WeeklyCharges = customer.WeeklyCharges;
-                db.SaveChanges();
-                return RedirectToAction("ServiceDetails");
-            }
-            catch
-            {
-                return View("CustomerIndex");
-            }
-        }
     }
 }

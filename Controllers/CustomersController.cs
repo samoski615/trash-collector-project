@@ -52,7 +52,7 @@ namespace TrashCollector
         //POST: Create Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id, FirstName, LastName, StreetAddress, City, State, ZipCode, DayOfWeek")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace TrashCollector
         //POST: Edit Customer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode, PickupDay, ExtraDate")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id, ApplicationId, FirstName, LastName, StreetAddress, City, State, ZipCode, DayOfWeek, ExtraDate")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -131,7 +131,7 @@ namespace TrashCollector
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePickupDay([Bind(Include = "PickupDay")] Customer customer)
+        public ActionResult ChangePickupDay([Bind(Include = "DayOfWeek")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -196,14 +196,9 @@ namespace TrashCollector
             {
                 var uId = User.Identity.GetUserId();
                 var cust = db.Customers.Where(c => c.ApplicationId == uId).FirstOrDefault();
-                if (cust.StartDate == customer.StartDate)
-                {
-                    db.SaveChanges();
-                }
-                if (cust.EndDate == customer.EndDate)
-                {
-                    db.SaveChanges();
-                }
+                cust.StartDate = customer.StartDate;
+                cust.EndDate = customer.EndDate;
+                db.SaveChanges();
                 return RedirectToAction("CustomerDetails");
             }
 

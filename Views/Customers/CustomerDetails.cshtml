@@ -30,10 +30,16 @@
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PickupDay)
+            @Html.DisplayNameFor(model => model.DayOfWeek)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ExtraDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
         </th>
         <th></th>
     </tr>
@@ -60,14 +66,20 @@
         @Html.DisplayFor(modelItem => item.ZipCode)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.PickupDay)
+        @Html.DisplayFor(modelItem => item.DayOfWeek)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.ExtraDate)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("View Balance", "ViewBalance", new { id = item.Id }) 
+        @Html.DisplayFor(modelItem => item.StartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndDate)
+    </td>
+    <td>
+        @Html.ActionLink("View Balance", "ViewBalance", new { id = item.Id }) |
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) 
     </td>
 </tr>
     }

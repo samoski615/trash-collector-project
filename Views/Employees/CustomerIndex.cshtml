@@ -16,11 +16,11 @@
         </div>
     </div>
 }*@
-@*@using (Html.BeginForm("Search", "Employees"))
+@using (Html.BeginForm("Search", "Employees"))
     {
         @Html.Editor("SearchText")
         <input type="submit" value="Search" class="btn btn-default" />
-    }*@
+    }
 
     <table class="table">
         <tr>
@@ -38,9 +38,9 @@
                 @Html.DisplayNameFor(model => model.DayOfWeek)
             </th>
 
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ConfirmPickup)
-            </th>
+            </th>*@
 
             <th></th>
         </tr>
@@ -66,7 +66,7 @@
                         @Html.CheckBoxFor(modelItem => item.ConfirmPickup)
                     </td>*@
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
                     @*@Html.ActionLink("Search", "Search", new { id = item.Id })*@
                 </td>
             </tr>
