@@ -1,49 +1,82 @@
-﻿@model TrashCollector.Models.Employee
-
+﻿@model TrashCollector.Models.Customer
 @{
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
-@using (Html.BeginForm("Search", "Employees"))
-{
-    @Html.Editor("SearchText")
-    <input type="submit" value="Search" class="btn btn-default" />
-}
-
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Employee</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.ApplicationId)
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Weekday, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Weekday", new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Weekday", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Weekday, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Search" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+<h2>Search Results</h2>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    @*<h4></h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </dt>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        <dd>
+            @Html.DisplayFor(model => model.DayOfWeek)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOfWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtraDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtraDate)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Service Details", "ServiceDetails", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

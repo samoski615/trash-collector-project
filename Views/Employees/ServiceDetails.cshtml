@@ -3,13 +3,19 @@
     ViewBag.Title = "ServiceDetails";
 }
 
-@*<h2>Customer Service Details</h2>*@
-    <p>
-        @Html.ActionLink("Back to List", "Details")
-    </p>
+@*<h2>Customer Pickup Details</h2>*@
+    
     <div>
-        <h4>Customer Service Details</h4>
+        <h4>Customer Pickup Details</h4>
         <hr />
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ApplicationId)
+        @Html.HiddenFor(model => model.WeeklyCharges)
+        @Html.HiddenFor(model => model.ConfirmPickup)
+
+
+
+
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -91,13 +97,17 @@
                 @Html.DisplayFor(model => model.EndDate)
             </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ConfirmPickup)
-            </dt>
+            @using (Html.BeginForm("Search", "Employee"))
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.ConfirmPickup)
+                </dt>
 
-            <dd>
-                @Html.CheckBoxFor(model => model.ConfirmPickup)
-            </dd>
+                <dd>
+                    @Html.CheckBoxFor(model => model.ConfirmPickup, false)
+                </dd>
+            }
+
         </dl>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

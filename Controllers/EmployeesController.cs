@@ -19,7 +19,7 @@ namespace TrashCollector.Controllers
         public ActionResult Index()
         {
             return View();
-        }        
+        }
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -28,7 +28,7 @@ namespace TrashCollector.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer= db.Customers.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -145,26 +145,22 @@ namespace TrashCollector.Controllers
                 return View(todaysPickups.ToList());
             }
         }
-        //public ActionResult Search(DayOfWeek dayOfWeek)
-        //{
-        //    var currentUId = User.Identity.GetUserId();
-        //    var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
-        //    var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
+        public ActionResult Search(System.DayOfWeek? dayOfWeek)
+        {
+            var currentUId = User.Identity.GetUserId();
+            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
+            var daysMatched = db.Customers.Where(c => c.DayOfWeek.Equals(dayOfWeek));
 
-        //    if (todaysPickups.Equals(null))
-        //    {
-        //        return View("Index");
-        //    }
-        //    if (dayOfWeek == input)
-        //    {
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        return View(todaysPickups.ToList());
-        //    }
-        //}
-
+            if (todaysPickups.Equals(null))
+            {
+                return View("Index");
+            }
+            else
+            {
+                return View(daysMatched);
+            }
+        }
         public ActionResult ServiceDetails(int? id)
         {
             if (id == null)
@@ -178,17 +174,30 @@ namespace TrashCollector.Controllers
             }
             return View(customer);
         }
-        public ActionResult ConfirmPickup(int id)
+        public ActionResult ConfirmPickup(Customer customer)
         {
-            var customer = db.Customers.Find(id);
-            customer.ConfirmPickup = true;
-            ChargeCustomer(customer);
-            return RedirectToAction("CustomerIndex");
+            //var customer = db.Customers.Find(id);
+            ViewBag.ConfirmPickup = customer.ConfirmPickup;
+            if (customer.ConfirmPickup == true)
+            {
+                ChargeCustomer(customer);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View("ConfirmCharges");
         }
+
         public void ChargeCustomer(Customer customer)
         {
             customer.WeeklyCharges += 25.00;
             db.SaveChanges();
+        }
+        
+        public ActionResult ConfirmCharges()
+        {
+            return View();
         }
 
 

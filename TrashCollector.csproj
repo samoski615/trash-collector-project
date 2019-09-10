@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201909100352224_oops.Designer.cs">
       <DependentUpon>201909100352224_oops.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909100532402_ohLord.cs" />
+    <Compile Include="Migrations\201909100532402_ohLord.Designer.cs">
+      <DependentUpon>201909100532402_ohLord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -262,6 +266,7 @@
     <Content Include="Views\Employees\CustomerIndex.cshtml" />
     <Content Include="Views\Employees\ServiceDetails.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\ConfirmCharges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +287,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909100352224_oops.resx">
       <DependentUpon>201909100352224_oops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909100532402_ohLord.resx">
+      <DependentUpon>201909100532402_ohLord.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

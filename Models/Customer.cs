@@ -59,8 +59,8 @@ namespace TrashCollector.Models
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }
-    public enum DayOfWeek
-    {
-        Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
-    }
+    //public enum DayOfWeek
+    //{
+    //    Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+    //}
 }

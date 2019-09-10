@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TrashCollector.Models.Customer>
 
 @{
-    ViewBag.Title = "MonthlyBalance";
+    ViewBag.Title = "ConfirmCharges";
 }
 
-<h2>View Monthly Balance</h2>
+<h2>Customer Balance</h2>
 
 <p>
-    @Html.ActionLink("Customer Home", "Index", "Home")
+    @Html.ActionLink("Employee Home", "Index", "Home")
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.WeeklyCharges)
             </td>
-            <td>
-                @Html.ActionLink("Pay Bill", "PayBill", new { id = item.Id }) 
-           </td>
+            @*<td>
+                @Html.ActionLink("Pay Bill", "PayBill", new { id = item.Id })
+            </td>*@
         </tr>
     }
 
