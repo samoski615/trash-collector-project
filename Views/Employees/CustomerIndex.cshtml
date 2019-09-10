@@ -6,21 +6,20 @@
 
 <h2>Today's Pickups</h2>
 
-@*@foreach (var item in Model)
+@foreach (var item in Model)
 {
     <div class="form-group">
         @Html.LabelFor(modelItem => item.DayOfWeek, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Weekday", new SelectList(Enum.GetValues(typeof(WeekDays))), "Select Weekday", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
+            @Html.DropDownList("DayOFWeek", new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Weekday", new { @class = "form-control" })
         </div>
     </div>
-}*@
-@using (Html.BeginForm("Search", "Employee"))
+}
+@*@using (Html.BeginForm("Search", "Employees"))
     {
         @Html.Editor("SearchText")
         <input type="submit" value="Search" class="btn btn-default" />
-    }
+    }*@
 
     <table class="table">
         <tr>

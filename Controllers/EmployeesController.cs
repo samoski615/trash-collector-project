@@ -186,7 +186,7 @@ namespace TrashCollector.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View("ConfirmCharges");
+            return View("ServiceDetails");
         }
 
         public void ChargeCustomer(Customer customer)
@@ -195,10 +195,10 @@ namespace TrashCollector.Controllers
             db.SaveChanges();
         }
         
-        public ActionResult ConfirmCharges()
-        {
-            return View();
-        }
+        //public ActionResult ConfirmCharges()
+        //{
+        //    return View();
+        //}
 
 
     }
