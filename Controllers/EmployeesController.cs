@@ -130,37 +130,37 @@ namespace TrashCollector.Controllers
             base.Dispose(disposing);
         }
         // GET: Employees Daily Route of Customers by ZipCode
-        public ActionResult CustomerIndex()
-        {
-            var currentUId = User.Identity.GetUserId();
-            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
-            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
+        //public ActionResult CustomerIndex()
+        //{
+        //    var currentUId = User.Identity.GetUserId();
+        //    var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+        //    var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
 
-            if (todaysPickups.Equals(null))
-            {
-                return View("Index");
-            }
-            else
-            {
-                return View(todaysPickups.ToList());
-            }
-        }
-        public ActionResult Search(System.DayOfWeek? dayOfWeek)
-        {
-            var currentUId = User.Identity.GetUserId();
-            var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
-            var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
-            var daysMatched = db.Customers.Where(c => c.DayOfWeek.Equals(dayOfWeek));
+        //    if (todaysPickups.Equals(null))
+        //    {
+        //        return View("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(todaysPickups.ToList());
+        //    }
+        //}
+        //public ActionResult Search(System.DayOfWeek? dayOfWeek)
+        //{
+        //    var currentUId = User.Identity.GetUserId();
+        //    var employee = db.Employees.Where(e => e.ApplicationId == currentUId).SingleOrDefault();
+        //    var todaysPickups = db.Customers.Where(c => c.ZipCode == employee.ZipCode);
+        //    var daysMatched = db.Customers.Where(c => c.DayOfWeek.Equals(dayOfWeek));
 
-            if (todaysPickups.Equals(null))
-            {
-                return View("Index");
-            }
-            else
-            {
-                return View(daysMatched);
-            }
-        }
+        //    if (todaysPickups.Equals(null))
+        //    {
+        //        return View("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(daysMatched);
+        //    }
+        //}
         public ActionResult ServiceDetails(int? id)
         {
             if (id == null)
@@ -200,6 +200,10 @@ namespace TrashCollector.Controllers
         //    return View();
         //}
 
+        public ActionResult MapOfDailyCustomers()
+        {
+            return View();
+        }
 
     }
 }

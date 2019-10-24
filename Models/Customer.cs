@@ -24,18 +24,6 @@ namespace TrashCollector.Models
         [Display(Name = "Monthly Balance")]
         public double MonthlyBalance { get; set; }
 
-        [Display(Name = "Street Address")]
-        public string StreetAddress { get; set; }
-
-        [Display(Name = "City")]
-        public string City { get; set; }
-
-        [Display(Name = "State")]
-        public string State { get; set; }
-
-        [Display(Name = "Zip Code")]
-        public string ZipCode { get; set; }
-
         [Display(Name = "Suspend Services")]
         [DataType(DataType.Date)]
         public string StartDate { get; set; }
@@ -54,13 +42,13 @@ namespace TrashCollector.Models
         [Display(Name = "Confirm Pickup")]
         public bool ConfirmPickup { get; set; }
 
+        [ForeignKey("Address")]
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
     }
-    //public enum DayOfWeek
-    //{
-    //    Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
-    //}
+   
 }

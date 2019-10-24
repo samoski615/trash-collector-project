@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Home Page</title>
+    <title>@ViewBag.Title Home Page</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr") 
+<link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -32,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Landing Page</p>
+            <p>&copy; @DateTime.Now.Year - Oscar's Trash Removal</p>
         </footer>
     </div>
 
